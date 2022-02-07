@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Fruit" representedClassName="Fruit" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString="New Fruit"/>
+        <relationship name="garden" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Garden" inverseName="fruits" inverseEntity="Garden"/>
+    </entity>
+    <entity name="Garden" representedClassName="Garden" syncable="YES" codeGenerationType="class">
+        <relationship name="fruits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fruit" inverseName="garden" inverseEntity="Fruit"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Garden" positionX="-54" positionY="0" width="128" height="44"/>
+        <element name="Fruit" positionX="-36" positionY="9" width="128" height="59"/>
     </elements>
 </model>

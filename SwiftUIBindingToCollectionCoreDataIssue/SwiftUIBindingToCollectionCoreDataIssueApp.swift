@@ -13,7 +13,7 @@ struct SwiftUIBindingToCollectionCoreDataIssueApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(garden: .init(context: persistenceController.container.viewContext))
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
