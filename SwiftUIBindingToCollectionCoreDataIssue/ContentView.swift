@@ -11,13 +11,24 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @FetchRequest(
+        entity: Fruit.entity(), sortDescriptors: []
+    ) private var fruitResults: FetchedResults<Fruit>
+    
+    var allFruits: [Fruit] {
+        fruitResults.map { $0 }
+    }
+    
     @ObservedObject var garden: Garden
     
     var fruits: Binding<[Fruit]> {
         Binding {
-            (garden.fruits as? Set<Fruit> ?? []).sorted()
-        } set: {
-            garden.fruits = NSSet(array: [$0])
+            allFruits
+        } set: { newFruits in
+            for index in 0..<newFruits.count {
+                let fruit = allFruits[index]
+                fruit.name = newFruits[index].name
+            }
         }
     }
     
@@ -30,6 +41,7 @@ struct ContentView: View {
                 ToolbarItem {
                     Button(action: {
                         let newFruit = Fruit(context: viewContext)
+                        newFruit.garden = garden
                         garden.addToFruits(newFruit)
                     }) {
                         Label("Add Item", systemImage: "plus")
